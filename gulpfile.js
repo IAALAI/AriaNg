@@ -61,7 +61,7 @@ gulp.task('prepare-html', gulp.series('prepare-styles', 'prepare-scripts', 'prep
     .pipe($.if('js/*.js', $.replace(/\/\/# sourceMappingURL=.*/g, '')))
     .pipe($.if('css/*.css', $.replace(/\/\*# sourceMappingURL=.* \*\/$/g, '')))
     .pipe($.if(['js/moment-with-locales-*.min.js', 'js/plugins.min.js', 'js/aria-ng.min.js'], $.uglify({output: {comments: saveLicense}})))
-    .pipe($.if(['css/plugins.min.css', 'css/aria-ng.min.css'], $.cssnano({safe: true, autoprefixer: false})))
+    .pipe($.if(['css/plugins.min.css', 'css/aria-ng.min.css'], $.cssnano({preset: 'default', autoprefixer: false})))
     .pipe($.replace(/url\((\.\.\/fonts\/[a-zA-Z0-9\-]+\.woff2)(\?[a-zA-Z0-9\-_=.]+)?\)/g, (match, fileName) => {
         return 'url(' + fileName + ')'; // remove version of woff2 file (woff2 file should be cached via application cache)
     }))
